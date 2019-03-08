@@ -1,0 +1,16 @@
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\Data.dll.config
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\Data.dll
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\Data.pdb
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\EntityFramework.dll
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\EntityFramework.SqlServer.dll
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\EntityFramework.xml
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\EntityFramework.SqlServer.xml
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\obj\Debug\Data.csprojAssemblyReference.cache
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\obj\Debug\Data.csproj.CopyComplete
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\obj\Debug\Data.dll
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API\Data\obj\Debug\Data.pdb

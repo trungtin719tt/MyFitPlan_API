@@ -8,15 +8,16 @@ namespace Data
 
     [Table("FoodNutrition")]
     public partial class FoodNutrition
-    {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+    { 
         public int ID { get; set; }
 
         public int? FoodID { get; set; }
 
         public int? NutritionID { get; set; }
 
-        public double? Quantity { get; set; }
+        //public string Portion { get; set; }
+
+        public string Quantity { get; set; }
 
         public bool? IsActive { get; set; }
 

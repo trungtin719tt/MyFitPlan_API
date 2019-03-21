@@ -1,4 +1,4 @@
-namespace Data
+﻿namespace Data
 {
     using System;
     using System.Data.Entity;
@@ -12,6 +12,8 @@ namespace Data
         public MyFitPlanDBContext()
             : base("name=MyFitPlanDBContext")
         {
+            this.Configuration.ProxyCreationEnabled = true; //tắt proxy để xài entity trả về client
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
         public virtual DbSet<Category> Categories { get; set; }

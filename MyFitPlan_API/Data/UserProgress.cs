@@ -20,6 +20,14 @@ namespace Data
 
         public double? Height { get; set; }
 
+        public int GoalCalories { get; set; }
+
+        public int GoalFat { get; set; }
+
+        public int GoalCarbs { get; set; }
+
+        public int GoalProtein { get; set; }
+
         public virtual AccUser AccUser { get; set; }
     }
 }

@@ -9,7 +9,6 @@ namespace Data
     [Table("CategoryDetail")]
     public partial class CategoryDetail
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         public int? PersonalCategoryID { get; set; }

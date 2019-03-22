@@ -9,7 +9,7 @@ namespace MyFitPlan_API.Models
     {
         public PersonalCategoryModel()
         {
-            CategoryDetails = new HashSet<CategoryDetailModel>();
+            Foods = new List<FoodModel>();
         }
 
         public int ID { get; set; }
@@ -20,8 +20,6 @@ namespace MyFitPlan_API.Models
 
         public bool? IsActive { get; set; }
 
-        public ICollection<CategoryDetailModel> CategoryDetails { get; set; }
-
-        public AccUserModel AccUser { get; set; }
+        public List<FoodModel> Foods { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Data;
+using MyFitPlan_API.Models;
 
 namespace MyFitPlan_API.Controllers
 {
@@ -18,69 +19,74 @@ namespace MyFitPlan_API.Controllers
         private MyFitPlanDBContext db = new MyFitPlanDBContext();
 
         // GET: api/CategoryDetails
-        public IQueryable<CategoryDetail> GetCategoryDetails()
-        {
-            return db.CategoryDetails;
-        }
+        //public IQueryable<CategoryDetail> GetCategoryDetails()
+        //{
+        //    return db.CategoryDetails;
+        //}
 
         // GET: api/CategoryDetails/5
-        [ResponseType(typeof(CategoryDetail))]
-        public IHttpActionResult GetCategoryDetail(int id)
-        {
-            CategoryDetail categoryDetail = db.CategoryDetails.Find(id);
-            if (categoryDetail == null)
-            {
-                return NotFound();
-            }
+        //[ResponseType(typeof(CategoryDetail))]
+        //public IHttpActionResult GetCategoryDetail(int id)
+        //{
+        //    CategoryDetail categoryDetail = db.CategoryDetails.Find(id);
+        //    if (categoryDetail == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(categoryDetail);
-        }
+        //    return Ok(categoryDetail);
+        //}
 
         // PUT: api/CategoryDetails/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCategoryDetail(int id, CategoryDetail categoryDetail)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutCategoryDetail(int id, CategoryDetail categoryDetail)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != categoryDetail.ID)
-            {
-                return BadRequest();
-            }
+        //    if (id != categoryDetail.ID)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(categoryDetail).State = EntityState.Modified;
+        //    db.Entry(categoryDetail).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryDetailExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!CategoryDetailExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/CategoryDetails
-        [ResponseType(typeof(CategoryDetail))]
-        public IHttpActionResult PostCategoryDetail(CategoryDetail categoryDetail)
+        public IHttpActionResult PostCategoryDetail(CategoryDetailModel categoryDetail)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.CategoryDetails.Add(categoryDetail);
+            CategoryDetail newCD = new CategoryDetail()
+            {
+                FoodID = categoryDetail.FoodID,
+                PersonalCategoryID = categoryDetail.PersonalCategoryID
+            };
+
+            db.CategoryDetails.Add(newCD);
 
             try
             {

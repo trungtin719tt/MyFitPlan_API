@@ -55,7 +55,7 @@ namespace MyFitPlan_API.Controllers
         public IHttpActionResult GetDailyProgresss(int accUserID, DateTime date)
         {
             DailyProgresss dailyProgresss = db.DailyProgressses
-                .Where(p => p.AccUserID == accUserID && p.Date == date)
+                .Where(p => p.AccUserID == accUserID && p.Date == date.Date)
                 .FirstOrDefault();
             if (dailyProgresss == null)
             {

@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Data;
+using MyFitPlan_API.Models;
 
 namespace MyFitPlan_API.Controllers
 {
@@ -18,22 +19,50 @@ namespace MyFitPlan_API.Controllers
         private MyFitPlanDBContext db = new MyFitPlanDBContext();
 
         // GET: api/Diaries
-        public IQueryable<Diary> GetDiaries()
-        {
-            return db.Diaries;
-        }
+        //public IQueryable<Diary> GetDiaries()
+        //{
+        //    return db.Diaries;
+        //}
 
         // GET: api/Diaries/5
-        [ResponseType(typeof(Diary))]
-        public IHttpActionResult GetDiary(int id)
+        public IHttpActionResult GetDiary(int accUserID, DateTime date)
         {
-            Diary diary = db.Diaries.Find(id);
+            var diary = db.Diaries.Where(p => p.AccUserID == accUserID && p.Date == date);
             if (diary == null)
             {
                 return NotFound();
             }
 
-            return Ok(diary);
+            var ListDiaryModel = diary
+                .Select(p => new DiaryModel()
+                {
+                    AccUserID = p.AccUserID,
+                    Date = p.Date,
+                    ID = p.ID,
+                    Quantity = p.Quantity,
+                    Time = p.Time,
+                    FoodID = p.FoodID,
+                    Food = new FoodModel()
+                    {
+                        Calories = p.Food.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault() == null ? null : p.Food.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault().Quantity,
+                        Fat = p.Food.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Fat")).FirstOrDefault() == null ? null : p.Food.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Fat")).FirstOrDefault().Quantity,
+                        Carbs = p.Food.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Carbs")).FirstOrDefault() == null ? null : p.Food.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Carbs")).FirstOrDefault().Quantity,
+                        Protein = p.Food.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Protein")).FirstOrDefault() == null ? null : p.Food.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Protein")).FirstOrDefault().Quantity,
+                        DateCreated = p.Food.DateCreated,
+                        CategoryID = p.Food.CategoryID,
+                        CreatedBy = p.Food.CreatedBy,
+                        Description = p.Food.Description,
+                        FollowedBy = p.Food.FollowedBy,
+                        ID = p.Food.ID,
+                        NameENG = p.Food.NameENG,
+                        NameVN = p.Food.NameVN,
+                        Note = p.Food.Note,
+                        Rate = p.Food.Rate,
+                        Unit = p.Food.Unit != null ? p.Food.Unit : null
+                    }
+                }).ToList();
+
+            return Ok(ListDiaryModel);
         }
 
         // PUT: api/Diaries/5
@@ -72,18 +101,86 @@ namespace MyFitPlan_API.Controllers
         }
 
         // POST: api/Diaries
-        [ResponseType(typeof(Diary))]
-        public IHttpActionResult PostDiary(Diary diary)
+        public IHttpActionResult PostDiary(DiaryModel diaryModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Diaries.Add(diary);
+            var newDM = new Diary()
+            {
+                Quantity = diaryModel.Quantity,
+                Time = diaryModel.Time,
+                FoodID = diaryModel.FoodID,
+                AccUserID = diaryModel.AccUserID,
+                Date = diaryModel.Date
+            };
+
+            double calories = 0, fat = 0, carbs = 0, protein = 0;
+            var food = db.Foods.Find(diaryModel.FoodID);
+            var caloriesObject = food.FoodNutritions.Where(p => p.Nutrition.Name.Equals("Calories")).FirstOrDefault();
+            if (caloriesObject != null)
+            {
+                try
+                {
+                    calories = Double.Parse(caloriesObject.Quantity);
+                }
+                catch (Exception)
+                {
+                    calories = Double.Parse(caloriesObject.Quantity.Substring(0, caloriesObject.Quantity.Length - 1));
+                }
+            }
+            var fatObject = food.FoodNutritions.Where(p => p.Nutrition.Name.Equals("Fat")).FirstOrDefault();
+            if (fatObject != null)
+            {
+                try
+                {
+                    fat = Double.Parse(fatObject.Quantity);
+                }
+                catch (Exception)
+                {
+                    fat = Double.Parse(fatObject.Quantity.Substring(0, fatObject.Quantity.Length - 1));
+                }
+            }
+            var proteinObject = food.FoodNutritions.Where(p => p.Nutrition.Name.Equals("Protein")).FirstOrDefault();
+            if (proteinObject != null)
+            {
+                try
+                {
+                    protein = Double.Parse(proteinObject.Quantity);
+                }
+                catch (Exception)
+                {
+                    protein = Double.Parse(proteinObject.Quantity.Substring(0, proteinObject.Quantity.Length - 1));
+                }
+            }
+            var carbsObject = food.FoodNutritions.Where(p => p.Nutrition.Name.Equals("Carbs")).FirstOrDefault();
+            if (carbsObject != null)
+            {
+                try
+                {
+                    carbs = Double.Parse(carbsObject.Quantity);
+                }
+                catch (Exception)
+                {
+                    carbs = Double.Parse(carbsObject.Quantity.Substring(0, carbsObject.Quantity.Length - 1));
+                }
+            }
+
+            var dailyProgress = db.DailyProgressses
+                .Where(p => p.AccUserID == diaryModel.AccUserID && p.Date == diaryModel.Date)
+                .FirstOrDefault();
+            dailyProgress.AbsorbedCalories += calories * diaryModel.Quantity;
+            dailyProgress.AbsorbedCarbs += carbs * diaryModel.Quantity;
+            dailyProgress.AbsorbedFat += fat * diaryModel.Quantity;
+            dailyProgress.AbsorbedProtein += protein * diaryModel.Quantity;
+            db.Entry(dailyProgress).State = EntityState.Modified;
+
+            db.Diaries.Add(newDM);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = diary.ID }, diary);
+            return Ok(diaryModel) /*CreatedAtRoute("DefaultApi", new { id = newDM.ID }, newDM)*/;
         }
 
         // DELETE: api/Diaries/5

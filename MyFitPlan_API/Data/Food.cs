@@ -23,6 +23,8 @@ namespace Data
 
         public string NameVN { get; set; }
 
+        public string FoodCode { get; set; }
+
         public string NameENG { get; set; }
 
         public string Description { get; set; }

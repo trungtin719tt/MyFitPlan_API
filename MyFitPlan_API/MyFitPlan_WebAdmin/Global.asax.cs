@@ -1,4 +1,6 @@
-﻿using Data;
+﻿using AutoMapper;
+using Data;
+using MyFitPlan_WebAdmin.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,14 @@ namespace MyFitPlan_WebAdmin
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Initialization();
+        }
+        protected void Initialization()
+        {
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<Food, FoodEditViewModel>();
+                cfg.CreateMap<FoodEditViewModel, Food>();
+            });
         }
     }
 }

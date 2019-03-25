@@ -222,3 +222,8 @@ E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API_Git\MyFitPlan_API\MyFitPlan_WebAdmi
 E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API_Git\MyFitPlan_API\MyFitPlan_WebAdmin\obj\Debug\MyFitPlan_WebAdmin.csproj.CopyComplete
 E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API_Git\MyFitPlan_API\MyFitPlan_WebAdmin\obj\Debug\MyFitPlan_WebAdmin.dll
 E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API_Git\MyFitPlan_API\MyFitPlan_WebAdmin\obj\Debug\MyFitPlan_WebAdmin.pdb
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API_Git\MyFitPlan_API\MyFitPlan_WebAdmin\bin\AutoMapper.dll
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API_Git\MyFitPlan_API\MyFitPlan_WebAdmin\bin\System.ValueTuple.dll
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API_Git\MyFitPlan_API\MyFitPlan_WebAdmin\bin\AutoMapper.pdb
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API_Git\MyFitPlan_API\MyFitPlan_WebAdmin\bin\AutoMapper.xml
+E:\FPT\fpt2\projectgym\code-re\MyFitPlan_API_Git\MyFitPlan_API\MyFitPlan_WebAdmin\bin\System.ValueTuple.xml

@@ -1,0 +1,139 @@
+﻿@model MyFitPlan_WebAdmin.Models.FoodEditViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h3>
+        @if (Model.NameVN.Count() == 0 || Model.NameVN == null)
+        {
+            @Model.NameENG
+        }
+        else
+        {
+            @Model.NameVN
+        }
+    </h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FoodCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameVN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameVN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NameENG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameENG)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Protein)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Protein)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fat)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fat)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Carbs)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Carbs)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Calories)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Calories)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FollowedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FollowedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.AccUser.ApplicationUserID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccUser.ApplicationUserID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.Description)
+            </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

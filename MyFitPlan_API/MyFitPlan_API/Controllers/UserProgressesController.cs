@@ -12,6 +12,7 @@ using Data;
 
 namespace MyFitPlan_API.Controllers
 {
+    [Authorize]
     public class UserProgressesController : ApiController
     {
         private MyFitPlanDBContext db = new MyFitPlanDBContext();

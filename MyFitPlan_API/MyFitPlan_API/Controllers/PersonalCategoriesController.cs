@@ -13,6 +13,7 @@ using MyFitPlan_API.Models;
 
 namespace MyFitPlan_API.Controllers
 {
+    [Authorize]
     public class PersonalCategoriesController : ApiController
     {
         private MyFitPlanDBContext db = new MyFitPlanDBContext();

@@ -14,6 +14,7 @@ using MyFitPlan_API.Models;
 
 namespace MyFitPlan_API.Controllers
 {
+    [Authorize]
     public class FoodsController : ApiController
     {
         private MyFitPlanDBContext db = new MyFitPlanDBContext();
@@ -33,7 +34,50 @@ namespace MyFitPlan_API.Controllers
                 page_size = 100;
             }
             var skip = ((int)page - 1) * page_size.Value;
-            var food = db.Foods.OrderBy(f => f.ID).Skip(skip).Take((int)page_size)
+            var food = db.Foods.OrderBy(f => f.FollowedBy).Skip(skip).Take((int)page_size)
+                .Select(p => new FoodModel()
+                {
+                    Calories = p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault() == null ? null : p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault().Quantity,
+                    Fat = p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Fat")).FirstOrDefault() == null ? null : p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Fat")).FirstOrDefault().Quantity,
+                    Carbs = p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Carbs")).FirstOrDefault() == null ? null : p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Carbs")).FirstOrDefault().Quantity,
+                    Protein = p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Protein")).FirstOrDefault() == null ? null : p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Protein")).FirstOrDefault().Quantity,
+                    DateCreated = p.DateCreated,
+                    CategoryID = p.CategoryID,
+                    CreatedBy = p.CreatedBy,
+                    Description = p.Description,
+                    FollowedBy = p.FollowedBy,
+                    ID = p.ID,
+                    NameENG = p.NameENG,
+                    NameVN = p.NameVN,
+                    Note = p.Note,
+                    Rate = p.Rate,
+                    Unit = p.Unit != null ? p.Unit : null
+                }).ToList();
+
+            return Ok(food);
+        }
+
+        public IHttpActionResult GetFoods(string keyword, int? page = 1, int? page_size = 20)
+        {
+            if (page == 0 || page == null)
+            {
+                page = 1;
+            }
+            if (page_size < 20 || page == null)
+            {
+                page_size = 20;
+            }
+            if (page_size > 100)
+            {
+                page_size = 100;
+            }
+            var skip = ((int)page - 1) * page_size.Value;
+            var foodList = db.Foods;
+            if (keyword == null)
+            {
+                keyword = "";
+            }
+            var food = db.Foods.Where(p => p.NameENG.Contains(keyword) || p.NameVN.Contains(keyword)).OrderBy(f => f.FollowedBy).Skip(skip).Take((int)page_size)
                 .Select(p => new FoodModel()
                 {
                     Calories = p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault() == null ? null : p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault().Quantity,

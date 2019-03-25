@@ -13,6 +13,7 @@ using Data;
 
 namespace MyFitPlan_API.Controllers
 {
+    [Authorize]
     public class CategoriesController : ApiController
     {
         private MyFitPlanDBContext db = new MyFitPlanDBContext();

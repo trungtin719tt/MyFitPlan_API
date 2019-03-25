@@ -14,6 +14,7 @@ using MyFitPlan_API.Models;
 
 namespace MyFitPlan_API.Controllers
 {
+    [Authorize]
     public class DailyProgresssesController : ApiController
     {
         private MyFitPlanDBContext db = new MyFitPlanDBContext();

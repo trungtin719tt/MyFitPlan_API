@@ -132,7 +132,7 @@ namespace MyFitPlan_API.Controllers
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            return Ok(model);
         }
 
         // POST api/Account/SetPassword
@@ -338,7 +338,7 @@ namespace MyFitPlan_API.Controllers
                 return GetErrorResult(result);
             }
 
-            return Ok();
+            return Ok(model);
         }
 
         // POST api/Account/RegisterExternal

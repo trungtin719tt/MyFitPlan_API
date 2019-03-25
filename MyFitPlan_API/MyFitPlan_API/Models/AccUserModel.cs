@@ -34,6 +34,10 @@ namespace MyFitPlan_API.Models
 
         public short? TrainingLevel { get; set; }
 
+        public double? Weight { get; set; }
+
+        public double? Height { get; set; }
+
         //public ICollection<DailyProgresssModel> DailyProgressses { get; set; }
 
         //public ICollection<DiaryModel> Diaries { get; set; }

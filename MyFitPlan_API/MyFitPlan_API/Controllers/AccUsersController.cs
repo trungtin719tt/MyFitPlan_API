@@ -15,6 +15,7 @@ using MyFitPlan_API.Models;
 
 namespace MyFitPlan_API.Controllers
 {
+    [Authorize]
     public class AccUsersController : ApiController
     {
         private MyFitPlanDBContext db = new MyFitPlanDBContext();
@@ -134,9 +135,61 @@ namespace MyFitPlan_API.Controllers
             };
 
             db.AccUsers.Add(newAccUser);
+
+            double calo = 0, fat = 0, carb = 0, protein = 0, BRM = 0, TDDE = 0;
+            if (accUser.Gender.Equals("M"))
+            {
+                BRM = 13.397 * accUser.Weight.Value
+                    + 4.799 * accUser.Height.Value
+                    - 5.677 * (DateTime.Now.Year - accUser.DateOfBirth.Value.Year)
+                    + 88.362;
+                
+
+            }
+            else
+            {
+                BRM = 9.247 * accUser.Weight.Value
+                    + 3.098 * accUser.Height.Value
+                    - 4.330 * (DateTime.Now.Year - accUser.DateOfBirth.Value.Year)
+                    + 447.593;
+            }
+
+            switch (accUser.TrainingLevel)
+            {
+                case 0:
+                    TDDE = BRM * 1.2;
+                    break;
+                case 1:
+                    TDDE = BRM * 1.55;
+                    break;
+                case 2:
+                    TDDE = BRM * 1.725;
+                    break;
+            }
+
+            calo = TDDE + accUser.Purpose.Value * (1 * 7700 / 30);
+            protein = calo * 0.3 / 4;
+            carb = calo * 0.35 / 4;
+            fat = calo * 0.35 / 9;
+
+            
+
+            var newUserProgress = new UserProgress() //goal đang fix cứng
+            {
+                AccUserID = newAccUser.ID,
+                Date = DateTime.Now.Date,
+                Weight = accUser.Weight,
+                Height = accUser.Height,
+                GoalProtein = (int)protein,
+                GoalFat = (int)fat,
+                GoalCarbs = (int)carb,
+                GoalCalories = (int)calo
+            };
+            db.UserProgresses.Add(newUserProgress);
+
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = newAccUser.ID }, newAccUser);
+            return CreatedAtRoute("DefaultApi", new { id = newAccUser.ID }, accUser);
         }
 
         // DELETE: api/AccUsers/5

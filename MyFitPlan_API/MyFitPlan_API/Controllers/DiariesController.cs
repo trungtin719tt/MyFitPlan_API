@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Data;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using MyFitPlan_API.Models;
 
 namespace MyFitPlan_API.Controllers
@@ -18,6 +20,29 @@ namespace MyFitPlan_API.Controllers
     public class DiariesController : ApiController
     {
         private MyFitPlanDBContext db = new MyFitPlanDBContext();
+        private ApplicationUserManager _userManager;
+
+        public DiariesController()
+        {
+        }
+
+        public DiariesController(ApplicationUserManager userManager,
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+        {
+            UserManager = userManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: api/Diaries
         //public IQueryable<Diary> GetDiaries()
@@ -25,9 +50,16 @@ namespace MyFitPlan_API.Controllers
         //    return db.Diaries;
         //}
 
+
         // GET: api/Diaries/5
-        public IHttpActionResult GetDiary(int accUserID, DateTime date)
+        public IHttpActionResult GetDiary(DateTime date)
         {
+            AccUser accUser = db.AccUsers.Where(p => p.ApplicationUser.Email.Equals(User.Identity.Name)).FirstOrDefault();
+            if (accUser == null)
+            {
+                return NotFound();
+            }
+            var accUserID = accUser.ID;
             var diary = db.Diaries.Where(p => p.AccUserID == accUserID && p.Date == date);
             if (diary == null)
             {
@@ -104,6 +136,12 @@ namespace MyFitPlan_API.Controllers
         // POST: api/Diaries
         public IHttpActionResult PostDiary(DiaryModel diaryModel)
         {
+            AccUser accUserG = db.AccUsers.Where(p => p.ApplicationUser.Email.Equals(User.Identity.Name)).FirstOrDefault();
+            if (accUserG == null)
+            {
+                return NotFound();
+            }
+            var accUserID = accUserG.ID;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -114,7 +152,7 @@ namespace MyFitPlan_API.Controllers
                 Quantity = diaryModel.Quantity,
                 Time = diaryModel.Time,
                 FoodID = diaryModel.FoodID,
-                AccUserID = diaryModel.AccUserID,
+                AccUserID = accUserID,
                 Date = diaryModel.Date
             };
 
@@ -172,6 +210,38 @@ namespace MyFitPlan_API.Controllers
             var dailyProgress = db.DailyProgressses
                 .Where(p => p.AccUserID == diaryModel.AccUserID && p.Date == diaryModel.Date)
                 .FirstOrDefault();
+
+            if (dailyProgress == null)
+            {
+                var accUser = db.AccUsers.Find(accUserID);
+                if (accUser == null)
+                {
+                    return BadRequest();
+                }
+                var userProgresss = db.UserProgresses.Where(p => p.AccUserID == accUserID)
+                    .OrderByDescending(p => p.Date)
+                    .FirstOrDefault();
+                if (userProgresss == null)
+                {
+                    //add new progress
+                }
+                var newDP = new DailyProgresss()
+                {
+                    AbsorbedCalories = 0,
+                    AbsorbedCarbs = 0,
+                    AbsorbedFat = 0,
+                    AbsorbedProtein = 0,
+                    AccUserID = accUserID,
+                    Date = DateTime.Now.Date,
+                    GoalCalories = userProgresss.GoalCalories,
+                    GoalCarbs = userProgresss.GoalCarbs,
+                    GoalFat = userProgresss.GoalFat,
+                    GoalProtein = userProgresss.GoalProtein
+                };
+                db.DailyProgressses.Add(newDP);
+                db.SaveChanges();
+                dailyProgress = newDP;
+            }
             dailyProgress.AbsorbedCalories += calories * diaryModel.Quantity;
             dailyProgress.AbsorbedCarbs += carbs * diaryModel.Quantity;
             dailyProgress.AbsorbedFat += fat * diaryModel.Quantity;

@@ -53,8 +53,14 @@ namespace MyFitPlan_API.Controllers
             return Ok(DailyProgressModel);
         }
 
-        public IHttpActionResult GetDailyProgresss(int accUserID, DateTime date)
+        public IHttpActionResult GetDailyProgresss(DateTime date)
         {
+            AccUser accUserG = db.AccUsers.Where(p => p.ApplicationUser.Email.Equals(User.Identity.Name)).FirstOrDefault();
+            if (accUserG == null)
+            {
+                return NotFound();
+            }
+            var accUserID = accUserG.ID;
             DailyProgresss dailyProgresss = db.DailyProgressses
                 .Where(p => p.AccUserID == accUserID && p.Date == date.Date)
                 .FirstOrDefault();

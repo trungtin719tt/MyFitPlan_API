@@ -51,9 +51,9 @@ namespace MyFitPlan_API.Controllers
 
         // GET: api/AccUsers/5
         [ResponseType(typeof(AccUserModel))]
-        public IHttpActionResult GetAccUser(string email)
+        public IHttpActionResult GetAccUser()
         {
-            AccUser accUser = db.AccUsers.Where(p => p.ApplicationUser.Email.Equals(email)).FirstOrDefault();
+            AccUser accUser = db.AccUsers.Where(p => p.ApplicationUser.Email.Equals(User.Identity.Name)).FirstOrDefault();
             if (accUser == null)
             {
                 return NotFound();

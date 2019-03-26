@@ -34,7 +34,7 @@ namespace MyFitPlan_API.Controllers
                 page_size = 100;
             }
             var skip = ((int)page - 1) * page_size.Value;
-            var food = db.Foods.OrderBy(f => f.FollowedBy).Skip(skip).Take((int)page_size)
+            var food = db.Foods.OrderByDescending(f => f.FollowedBy).Skip(skip).Take((int)page_size)
                 .Select(p => new FoodModel()
                 {
                     Calories = p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault() == null ? null : p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault().Quantity,
@@ -77,7 +77,7 @@ namespace MyFitPlan_API.Controllers
             {
                 keyword = "";
             }
-            var food = db.Foods.Where(p => p.NameENG.Contains(keyword) || p.NameVN.Contains(keyword)).OrderBy(f => f.FollowedBy).Skip(skip).Take((int)page_size)
+            var food = db.Foods.Where(p => p.NameENG.Contains(keyword) || p.NameVN.Contains(keyword)).OrderByDescending(f => f.FollowedBy).Skip(skip).Take((int)page_size)
                 .Select(p => new FoodModel()
                 {
                     Calories = p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault() == null ? null : p.FoodNutritions.Where(j => j.Nutrition.Name.Equals("Calories")).FirstOrDefault().Quantity,

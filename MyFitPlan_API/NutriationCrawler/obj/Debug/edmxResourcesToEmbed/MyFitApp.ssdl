@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyFitPlanDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicationUserID" Type="nvarchar" MaxLength="128" />
+    <Property Name="DateOfBirth" Type="date" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Purpose" Type="smallint" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="1" />
+    <Property Name="TrainingLevel" Type="smallint" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="CategoryDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="PersonalCategoryID" Type="int" />
+    <Property Name="FoodID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DailyProgresss">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccUserID" Type="int" />
+    <Property Name="Date" Type="date" />
+    <Property Name="GoalProtein" Type="float" />
+    <Property Name="AbsorbedProtein" Type="float" />
+    <Property Name="GoalCalories" Type="float" />
+    <Property Name="AbsorbedCalories" Type="float" />
+    <Property Name="GoalFat" Type="float" />
+    <Property Name="AbsorbedFat" Type="float" />
+    <Property Name="GoalCarbs" Type="float" />
+    <Property Name="AbsorbedCarbs" Type="float" />
+  </EntityType>
+  <EntityType Name="Diary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccUserID" Type="int" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="Date" Type="date" />
+    <Property Name="FoodID" Type="int" />
+    <Property Name="Quantity" Type="float" />
+  </EntityType>
+  <EntityType Name="Food">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FoodCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="NameVN" Type="nvarchar(max)" />
+    <Property Name="NameENG" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+    <Property Name="Rate" Type="smallint" />
+    <Property Name="FollowedBy" Type="int" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="FoodNutrition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FoodID" Type="int" />
+    <Property Name="NutritionID" Type="int" />
+    <Property Name="Quantity" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Nutrition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Note" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="PersonalCategory">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccUserID" Type="int" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserProgress">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccUserID" Type="int" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Weight" Type="float" />
+    <Property Name="Height" Type="float" />
+  </EntityType>
+  <Association Name="FK_dbo_AccUser_dbo_AspNetUsers_ApplicationUserID">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="AccUser" Type="Self.AccUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AccUser">
+        <PropertyRef Name="ApplicationUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CategoryDetail_dbo_Food_FoodID">
+    <End Role="Food" Type="Self.Food" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CategoryDetail" Type="Self.CategoryDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Food">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CategoryDetail">
+        <PropertyRef Name="FoodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_CategoryDetail_dbo_PersonalCategory_PersonalCategoryID">
+    <End Role="PersonalCategory" Type="Self.PersonalCategory" Multiplicity="0..1" />
+    <End Role="CategoryDetail" Type="Self.CategoryDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonalCategory">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CategoryDetail">
+        <PropertyRef Name="PersonalCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_DailyProgresss_dbo_AccUser_AccUserID">
+    <End Role="AccUser" Type="Self.AccUser" Multiplicity="0..1" />
+    <End Role="DailyProgresss" Type="Self.DailyProgresss" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DailyProgresss">
+        <PropertyRef Name="AccUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Diary_dbo_AccUser_AccUserID">
+    <End Role="AccUser" Type="Self.AccUser" Multiplicity="0..1" />
+    <End Role="Diary" Type="Self.Diary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Diary">
+        <PropertyRef Name="AccUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Diary_dbo_Food_FoodID">
+    <End Role="Food" Type="Self.Food" Multiplicity="0..1" />
+    <End Role="Diary" Type="Self.Diary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Food">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Diary">
+        <PropertyRef Name="FoodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Food_dbo_AccUser_CreatedBy">
+    <End Role="AccUser" Type="Self.AccUser" Multiplicity="0..1" />
+    <End Role="Food" Type="Self.Food" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Food">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Food_dbo_Category_CategoryID">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Food" Type="Self.Food" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Food">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_FoodNutrition_dbo_Food_FoodID">
+    <End Role="Food" Type="Self.Food" Multiplicity="0..1" />
+    <End Role="FoodNutrition" Type="Self.FoodNutrition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Food">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FoodNutrition">
+        <PropertyRef Name="FoodID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_FoodNutrition_dbo_Nutrition_NutritionID">
+    <End Role="Nutrition" Type="Self.Nutrition" Multiplicity="0..1" />
+    <End Role="FoodNutrition" Type="Self.FoodNutrition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nutrition">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FoodNutrition">
+        <PropertyRef Name="NutritionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_PersonalCategory_dbo_AccUser_AccUserID">
+    <End Role="AccUser" Type="Self.AccUser" Multiplicity="0..1" />
+    <End Role="PersonalCategory" Type="Self.PersonalCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PersonalCategory">
+        <PropertyRef Name="AccUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_UserProgress_dbo_AccUser_AccUserID">
+    <End Role="AccUser" Type="Self.AccUser" Multiplicity="0..1" />
+    <End Role="UserProgress" Type="Self.UserProgress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserProgress">
+        <PropertyRef Name="AccUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MyFitPlanDBModelStoreContainer">
+    <EntitySet Name="AccUser" EntityType="Self.AccUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CategoryDetail" EntityType="Self.CategoryDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DailyProgresss" EntityType="Self.DailyProgresss" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Diary" EntityType="Self.Diary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Food" EntityType="Self.Food" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FoodNutrition" EntityType="Self.FoodNutrition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nutrition" EntityType="Self.Nutrition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonalCategory" EntityType="Self.PersonalCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProgress" EntityType="Self.UserProgress" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_AccUser_dbo_AspNetUsers_ApplicationUserID" Association="Self.FK_dbo_AccUser_dbo_AspNetUsers_ApplicationUserID">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AccUser" EntitySet="AccUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CategoryDetail_dbo_Food_FoodID" Association="Self.FK_dbo_CategoryDetail_dbo_Food_FoodID">
+      <End Role="Food" EntitySet="Food" />
+      <End Role="CategoryDetail" EntitySet="CategoryDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_CategoryDetail_dbo_PersonalCategory_PersonalCategoryID" Association="Self.FK_dbo_CategoryDetail_dbo_PersonalCategory_PersonalCategoryID">
+      <End Role="PersonalCategory" EntitySet="PersonalCategory" />
+      <End Role="CategoryDetail" EntitySet="CategoryDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_DailyProgresss_dbo_AccUser_AccUserID" Association="Self.FK_dbo_DailyProgresss_dbo_AccUser_AccUserID">
+      <End Role="AccUser" EntitySet="AccUser" />
+      <End Role="DailyProgresss" EntitySet="DailyProgresss" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Diary_dbo_AccUser_AccUserID" Association="Self.FK_dbo_Diary_dbo_AccUser_AccUserID">
+      <End Role="AccUser" EntitySet="AccUser" />
+      <End Role="Diary" EntitySet="Diary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Diary_dbo_Food_FoodID" Association="Self.FK_dbo_Diary_dbo_Food_FoodID">
+      <End Role="Food" EntitySet="Food" />
+      <End Role="Diary" EntitySet="Diary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Food_dbo_AccUser_CreatedBy" Association="Self.FK_dbo_Food_dbo_AccUser_CreatedBy">
+      <End Role="AccUser" EntitySet="AccUser" />
+      <End Role="Food" EntitySet="Food" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Food_dbo_Category_CategoryID" Association="Self.FK_dbo_Food_dbo_Category_CategoryID">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Food" EntitySet="Food" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_FoodNutrition_dbo_Food_FoodID" Association="Self.FK_dbo_FoodNutrition_dbo_Food_FoodID">
+      <End Role="Food" EntitySet="Food" />
+      <End Role="FoodNutrition" EntitySet="FoodNutrition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_FoodNutrition_dbo_Nutrition_NutritionID" Association="Self.FK_dbo_FoodNutrition_dbo_Nutrition_NutritionID">
+      <End Role="Nutrition" EntitySet="Nutrition" />
+      <End Role="FoodNutrition" EntitySet="FoodNutrition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_PersonalCategory_dbo_AccUser_AccUserID" Association="Self.FK_dbo_PersonalCategory_dbo_AccUser_AccUserID">
+      <End Role="AccUser" EntitySet="AccUser" />
+      <End Role="PersonalCategory" EntitySet="PersonalCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_UserProgress_dbo_AccUser_AccUserID" Association="Self.FK_dbo_UserProgress_dbo_AccUser_AccUserID">
+      <End Role="AccUser" EntitySet="AccUser" />
+      <End Role="UserProgress" EntitySet="UserProgress" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

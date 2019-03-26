@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyFitPlanDBModelStoreContainer" CdmEntityContainer="MyFitPlanDBEntities">
+    <EntitySetMapping Name="AccUsers">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.AccUser">
+        <MappingFragment StoreEntitySet="AccUser">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ApplicationUserID" ColumnName="ApplicationUserID" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="TrainingLevel" ColumnName="TrainingLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryDetails">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.CategoryDetail">
+        <MappingFragment StoreEntitySet="CategoryDetail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PersonalCategoryID" ColumnName="PersonalCategoryID" />
+          <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DailyProgressses">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.DailyProgresss">
+        <MappingFragment StoreEntitySet="DailyProgresss">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AccUserID" ColumnName="AccUserID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="GoalProtein" ColumnName="GoalProtein" />
+          <ScalarProperty Name="AbsorbedProtein" ColumnName="AbsorbedProtein" />
+          <ScalarProperty Name="GoalCalories" ColumnName="GoalCalories" />
+          <ScalarProperty Name="AbsorbedCalories" ColumnName="AbsorbedCalories" />
+          <ScalarProperty Name="GoalFat" ColumnName="GoalFat" />
+          <ScalarProperty Name="AbsorbedFat" ColumnName="AbsorbedFat" />
+          <ScalarProperty Name="GoalCarbs" ColumnName="GoalCarbs" />
+          <ScalarProperty Name="AbsorbedCarbs" ColumnName="AbsorbedCarbs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Diaries">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.Diary">
+        <MappingFragment StoreEntitySet="Diary">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AccUserID" ColumnName="AccUserID" />
+          <ScalarProperty Name="Time" ColumnName="Time" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Foods">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.Food">
+        <MappingFragment StoreEntitySet="Food">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FoodCode" ColumnName="FoodCode" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="NameVN" ColumnName="NameVN" />
+          <ScalarProperty Name="NameENG" ColumnName="NameENG" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="FollowedBy" ColumnName="FollowedBy" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FoodNutritions">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.FoodNutrition">
+        <MappingFragment StoreEntitySet="FoodNutrition">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FoodID" ColumnName="FoodID" />
+          <ScalarProperty Name="NutritionID" ColumnName="NutritionID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nutritions">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.Nutrition">
+        <MappingFragment StoreEntitySet="Nutrition">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonalCategories">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.PersonalCategory">
+        <MappingFragment StoreEntitySet="PersonalCategory">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AccUserID" ColumnName="AccUserID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProgresses">
+      <EntityTypeMapping TypeName="MyFitPlanDBModel.UserProgress">
+        <MappingFragment StoreEntitySet="UserProgress">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AccUserID" ColumnName="AccUserID" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="MyFitPlanDBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

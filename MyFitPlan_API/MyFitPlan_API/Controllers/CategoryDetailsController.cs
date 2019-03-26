@@ -81,6 +81,21 @@ namespace MyFitPlan_API.Controllers
                 return BadRequest(ModelState);
             }
 
+            var food = db.Foods.Find(categoryDetail.FoodID);
+            if (food == null)
+            {
+                return NotFound();
+            }
+
+            var checkCD = db.CategoryDetails
+                .Where(p => p.FoodID == categoryDetail.FoodID
+                && p.PersonalCategoryID == categoryDetail.PersonalCategoryID).FirstOrDefault();
+
+            if (checkCD != null)
+            {
+                return NotFound();
+            }
+
             CategoryDetail newCD = new CategoryDetail()
             {
                 FoodID = categoryDetail.FoodID,
@@ -88,6 +103,14 @@ namespace MyFitPlan_API.Controllers
             };
 
             db.CategoryDetails.Add(newCD);
+            if (food.FollowedBy == null)
+            {
+                food.FollowedBy = 1;
+            }
+            else
+            {
+                food.FollowedBy = food.FollowedBy.Value + 1;
+            }
 
             try
             {
@@ -104,6 +127,9 @@ namespace MyFitPlan_API.Controllers
                     throw;
                 }
             }
+
+            db.Entry(food).State = EntityState.Modified;
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = categoryDetail.ID }, categoryDetail);
         }

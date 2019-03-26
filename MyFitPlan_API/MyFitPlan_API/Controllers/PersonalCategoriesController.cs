@@ -66,8 +66,14 @@ namespace MyFitPlan_API.Controllers
             return Ok(personalCategoryModel);
         }
 
-        public IHttpActionResult GetPersonalCategory(int accUserID, int getType)
+        public IHttpActionResult GetPersonalCategory()
         {
+            AccUser accUserG = db.AccUsers.Where(p => p.ApplicationUser.Email.Equals(User.Identity.Name)).FirstOrDefault();
+            if (accUserG == null)
+            {
+                return NotFound();
+            }
+            var accUserID = accUserG.ID;
             var listPersonalCategory = db.PersonalCategories
                 .Where(p => p.IsActive.Value && p.AccUserID == accUserID);
             if (listPersonalCategory == null)
@@ -144,6 +150,12 @@ namespace MyFitPlan_API.Controllers
         // POST: api/PersonalCategories
         public IHttpActionResult PostPersonalCategory(PersonalCategoryModel personalCategoryModel)
         {
+            AccUser accUserG = db.AccUsers.Where(p => p.ApplicationUser.Email.Equals(User.Identity.Name)).FirstOrDefault();
+            if (accUserG == null)
+            {
+                return NotFound();
+            }
+            var accUserID = accUserG.ID;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -151,8 +163,8 @@ namespace MyFitPlan_API.Controllers
 
             PersonalCategory newPersonalCategory = new PersonalCategory()
             {
-                AccUserID = personalCategoryModel.AccUserID,
-                ID = personalCategoryModel.ID,
+                AccUserID = accUserID,
+                //ID = personalCategoryModel.ID,
                 IsActive = true,
                 Name = personalCategoryModel.Name
             };
@@ -160,7 +172,7 @@ namespace MyFitPlan_API.Controllers
             db.PersonalCategories.Add(newPersonalCategory);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = newPersonalCategory.ID }, newPersonalCategory);
+            return CreatedAtRoute("DefaultApi", new { id = newPersonalCategory.ID }, personalCategoryModel);
         }
 
         // DELETE: api/PersonalCategories/5

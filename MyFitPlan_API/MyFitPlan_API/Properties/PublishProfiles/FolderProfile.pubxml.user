@@ -145,10 +145,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2012 11:48:56</publishTime>
     </File>
     <File Include="bin/MyFitPlan_API.dll">
-      <publishTime>03/25/2019 22:14:23</publishTime>
+      <publishTime>03/26/2019 23:28:28</publishTime>
     </File>
     <File Include="bin/MyFitPlan_API.pdb">
-      <publishTime>03/25/2019 22:14:23</publishTime>
+      <publishTime>03/26/2019 23:28:28</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>02/18/2018 09:44:54</publishTime>

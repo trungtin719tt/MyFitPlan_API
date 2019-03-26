@@ -91,7 +91,7 @@ namespace MyFitPlan_WebAdmin.Controllers
             }
             var foodEditViewModel = new FoodEditViewModel();
             Mapper.Map(food, foodEditViewModel);
-            foodEditViewModel.CategoryName = db.Categories.FirstOrDefault(c => c.ID == foodEditViewModel.CategoryID).Name;
+            foodEditViewModel.CategoryName = foodEditViewModel.CategoryID != null? db.Categories.FirstOrDefault(c => c.ID == foodEditViewModel.CategoryID).Name : null;
             foodEditViewModel.Protein = db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Protein) == null ? "" : db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Protein).Quantity;
             foodEditViewModel.Fat = db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Fat) == null ? "" : db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Fat).Quantity;
             foodEditViewModel.Carbs = db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Carbs) == null ? "" : db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Carbs).Quantity;
@@ -171,7 +171,7 @@ namespace MyFitPlan_WebAdmin.Controllers
             }
             var foodEditViewModel = new FoodEditViewModel();
             Mapper.Map(food, foodEditViewModel);
-            foodEditViewModel.CategoryName = db.Categories.FirstOrDefault(c => c.ID == foodEditViewModel.CategoryID).Name;
+            foodEditViewModel.CategoryName = foodEditViewModel.CategoryID != null ? db.Categories.FirstOrDefault(c => c.ID == foodEditViewModel.CategoryID).Name : null;
             foodEditViewModel.Protein = db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Protein) == null ? "" : db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Protein).Quantity;
             foodEditViewModel.Fat = db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Fat) == null ? "" : db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Fat).Quantity;
             foodEditViewModel.Carbs = db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Carbs) == null ? "" : db.FoodNutritions.FirstOrDefault(f => f.FoodID == foodEditViewModel.ID && f.NutritionID == (int)NutriationIdEnum.Carbs).Quantity;
